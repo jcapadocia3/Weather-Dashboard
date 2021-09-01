@@ -1,0 +1,26 @@
+h1 {
+    text-align: center;
+    color: white;
+    background-color: blue;
+    padding: 8px;
+}
+
+#search {
+    border: 2px solid black;
+    height: 120px;
+}
+
+#currentCity {
+    border: 2px solid black;
+    height: 200px;
+}
+
+#history {
+    border: 2px solid black;
+    height: 400px;
+}
+
+#fiveDay {
+    border: 2px solid black;
+    height: 250px;
+}
