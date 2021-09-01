@@ -5,22 +5,12 @@ h1 {
     padding: 8px;
 }
 
-#search {
-    border: 2px solid black;
-    height: 120px;
+main {
+    display: flex;
 }
 
-#currentCity {
-    border: 2px solid black;
-    height: 200px;
-}
-
-#history {
-    border: 2px solid black;
-    height: 400px;
-}
-
-#fiveDay {
-    border: 2px solid black;
+.weatherContent {
     height: 250px;
+    border: 2px solid black;
+    width: auto;
 }
