@@ -1,65 +1,137 @@
+$("#searchButton").click(function() {
+  city = $("#searchInput").val();
+  // fetchAPI();
+
+  var checkArray = searchHistory.includes(city);
+
+  if (checkArray == true) {
+      return;
+  } else {
+      searchHistory.push(city);
+      localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+
+      var historyButton = $("<a>").attr({
+          class: "list-group-item list-group-item-action",
+          href: "#",
+
+      });
+      historyButton.text(city);
+      $("#searchList").append(historyButton);
+  };
+});
+$(".list-group-item").click(function() {
+  city = $(this).text();
+  // fetchAPI();
+});
+
+
+
+
+var searchHistory = [];
+
+function getItems() {
+    var storedHistory = JSON.parse(localStorage.getItem("searchHistory"));
+    if (storedHistory !== null) {
+        searchHistory = storedHistory;
+    };
+
+    for (i = 0; i < searchHistory.length; i++) {
+        if (i == 8) {
+            break;
+          }
+
+          historyButton = $("<a>").attr({
+            class: "list-group-item list-group-item-action",
+            href: "#"
+        });
+
+        historyButton.text(searchHistory[i]);
+        $("#searchList").append(historyButton);
+    }
+};
+
+getItems();
+
+
+
+
+
 //  http://api.openweathermap.org/data/2.5/forecast?id=524901&appid={API key}
 
 
-// var searchForm = document.getElementById("search")
+// var searchForm = document.getElementById("search");
 
-var searchForm = document.getElementById("search");
-
-searchForm.addEventListener("click", searchCity);
-
-function searchCity() {
-    event.preventDefault();
-  
-    var city = searchForm1.value.trim();
-
-    localStorage.setItem("city", JSON.stringify(city));
-    console.log("STORED!")
-};
+// searchForm.addEventListener("click", searchButtonHandler);
 
 // function searchCity() {
+//     event.preventDefault();
+  
+//     var city = searchForm1.value.trim();
 
-//     var getCity = !!localStorage.getItem('city') ? JSON.parse(localStorage.getItem('city')) : [];
-//     var searchForm = document.getElementById("search").value;
-
-//     getCity.push(searchForm);
-//     localStorage.setItem('city', JSON.stringify(getCity));
+//     localStorage.setItem("city", JSON.stringify(city));
 //     console.log("STORED!")
+
 // };
 
-// var aNumber = !!localStorage.getItem('number') ? JSON.parse(localStorage.getItem('number')) : [];
-// var number = document.getElementById('number').value;
-// aNumber.push(number);
-// localStorage.setItem('number', JSON.stringify(aNumber));
 
-// var getCity = !!localStorage.getItem('city') ? JSON.parse(localStorage.getItem('city')) : [];
-// var searchForm = document.getElementById("search").value;
-// getCity.push(searchForm);
-// localStorage.setItem('city', JSON.stringify(getCity));
 
-// var getCity = function (event) {
-//   var language = event.target.getAttribute('data-language');
+        
 
-//   if (language) {
-//     getFeaturedRepos(language);
 
-//     repoContainerEl.textContent = '';
-//   }
+// var $searchButton = $("#searchButton");
+// var $searchInput = $("#searchInput");
+
+// function searchButtonHandler() {
+//   var searchInput = $searchInput.val();
+//   var apiKey = "3a150e01056da8ad0b1ee8083da97feb";
+//   var weatherUrl = `http://api.openweathermap.org/data/2.5/forecast?q=${searchInput}&appid=${apiKey}`;
+
+//   $.ajax({
+//     url: weatherUrl,
+//     success: function(data) {
+//       console.log(data);
+
+//       var appendedDates = [];
+//       var appendedCount = 0;
+
+//       for (let i=0; i < data.list.length; i++) {
+//         var curr = data.list[i];
+//         var currDateText = curr.dt_txt;
+//         var currDate = currDateText.split(" ")[0];
+
+//         if (!appendedDates.includes(currDate)) {
+//           appendedDates.push(currDate);
+//           var temp = curr.main.temp;
+
+//           $("#searchlist").append(
+//             getPanelHTML(currDateText, temp)
+//           )
+//           appendedCount++;
+//           if (appendedCount > 4) {
+//             break;
+//           }
+//         }
+//       }
+//     }
+//   })
 // };
-// getCity();
+
+// $searchButton.click(searchButtonHandler);
 
 
 
 
 
 
-// var key = '3a150e01056da8ad0b1ee8083da97feb';
-// var city;
+
+
+
+// var key = "3a150e01056da8ad0b1ee8083da97feb";
+// var city = "chicago";
 // var url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}`;
 
 // fetch(url, {
-//     method: 'GET', //GET is the default.
-//     credentials: 'same-origin', // include, *same-origin, omit
-//     redirect: 'follow', // manual, *follow, error
+//     method: 'GET',
 //   })
 //   .then(function (response) {
 //     return response.json();
