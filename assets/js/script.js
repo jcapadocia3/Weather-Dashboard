@@ -127,7 +127,8 @@ var searchButton = $("#searchButton");
 
 searchButton.on("click", citySearch);
 
-function citySearch() {    
+function citySearch(e) {    
+  e.preventDefault();
 console.log("it works") 
 
 var key = "3a150e01056da8ad0b1ee8083da97feb";
@@ -135,7 +136,6 @@ var city = $("#searchInput").val();
 var url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}`;
 
 console.log(url)
-debugger
 
 fetch(url, {
     method: 'GET',
