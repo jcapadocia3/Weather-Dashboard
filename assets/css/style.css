@@ -10,7 +10,17 @@ main {
 }
 
 .weatherContent {
-    height: 250px;
+    /* height: 250px; */
     border: 2px solid black;
     width: auto;
+}
+
+.cityChoice {
+    font-size: 15px;
+    margin: 10px;
+}
+
+.fiveDay {
+    font-size: 15px;
+    margin: 10px;
 }
