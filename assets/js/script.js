@@ -29,7 +29,9 @@ $("#searchButton").click(function () {
 
 // Eventlistener for any list item that is clicked in Search History
 $(".list-group-item").click(function () {
-  city = $(this).text();
+  city = $(this).val();
+  citySearch(e);
+  fiveDay(e);
 });
 
 var searchHistory = [];
