@@ -60,17 +60,6 @@ function citySearch(e) {
 
   console.log(url);
 
-  // fetch(url, {
-  //     method: 'GET',
-  //   })
-  //   .then(function (response) {
-  //     return response.json();
-  //   })
-  //   .then(function (data) {
-  //     console.log(data);
-  //   })
-  // };
-
   fetch(url, {
     method: "GET",
   })
@@ -84,25 +73,15 @@ function citySearch(e) {
       var currentName = cityChoice.append("<p>");
       cityChoice.append(currentName);
 
-      var timeUTC = new Date(response.dt * 1000);
-      currentName.append(
-        response.name + " " + timeUTC.toLocaleDateString("en-US")
-      );
-      currentName.append(
-        `<img src="https://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png">`
-      );
+      var time = new Date(response.dt * 1000);
+      currentName.append(response.name + " " + time.toLocaleDateString("en-US"));
+      currentName.append(`<img src="https://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png">`);
 
       var currentWeather = currentName.append("<p>");
       currentName.append(currentWeather);
-      currentWeather.append(
-        "<p>" + "Temperature: " + response.main.temp + " F" + "</p>"
-      );
-      currentWeather.append(
-        "<p>" + "Humidity: " + response.main.humidity + "%" + "</p>"
-      );
-      currentWeather.append(
-        "<p>" + "Wind Speed: " + response.wind.speed + " mph" + "</p>"
-      );
+      currentWeather.append("<p>" + "Temperature: " + response.main.temp + " F" + "</p>");
+      currentWeather.append("<p>" + "Humidity: " + response.main.humidity + "%" + "</p>");
+      currentWeather.append("<p>" + "Wind: " + response.wind.speed + " mph" + "</p>");
 
       var uvURL = `https://api.openweathermap.org/data/2.5/uvi?q=&lat=${response.coord.lat}&lon=${response.coord.lon}&appid=${key}`;
 
@@ -116,4 +95,34 @@ function citySearch(e) {
           currentWeather.append("<p>" + "UV Index: " + response.value + "</p>");
         });
     });
+
+
+
+  $.ajax({
+    url: "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + key + "&units=imperial",
+    method: "GET"
+  })
+    .then(function (response) {
+      for (i = 0; i < 5; i++) {
+
+        var newItem = $("<div>");
+        $(".fiveDay").append(newItem);
+
+        var date = new Date(response.list[i * 8].dt * 1000);
+        newItem.append("<h4>" + date.toLocaleDateString() + "<h4>");
+
+        var iconCode = response.list[i * 8].weather[0].icon;
+        var iconURL = "http://openweathermap.org/img/wn/" + iconCode + ".png";
+        newItem.append($("<img>").attr("src", iconURL));
+
+        var temp = response.list[i * 8].main.temp;
+        newItem.append("<p>" + ("Temp: " + temp + " F") + "<p>");
+
+        var humidity = response.list[i * 8].main.humidity;
+        newItem.append("<p>" + ("Humidity: " + humidity) + "<p>");
+
+        var wind = response.list[i * 8].wind.speed;
+        newItem.append("<p>" + ("Wind: " + wind + " mph") + "<p>");
+      }
+    })
 }
