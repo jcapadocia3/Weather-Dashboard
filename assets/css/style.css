@@ -24,3 +24,18 @@ main {
     font-size: 15px;
     margin: 10px;
 }
+
+.borderGreen {
+    border: 2px solid green;
+    padding: 5px;
+}
+
+.borderYellow {
+    border: 2px solid yellow;
+    padding: 5px;
+}
+
+.borderRed {
+    border: 2px solid red;
+    padding: 5px;
+}

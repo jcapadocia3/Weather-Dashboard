@@ -1,3 +1,7 @@
+var searchButton = $("#searchButton");
+var key = "3a150e01056da8ad0b1ee8083da97feb";
+var city = $("#searchInput").val();
+
 $("#searchButton").click(function () {
   city = $("#searchInput").val();
 
@@ -46,16 +50,18 @@ function getItems() {
 
 getItems();
 
-var searchButton = $("#searchButton");
 
-searchButton.on("click", citySearch);
+
+function callFunctions(e) {
+  // location.reload(true);
+  citySearch(e);
+  fiveDay(e);
+};
 
 function citySearch(e) {
   e.preventDefault();
   console.log("it works");
 
-  var key = "3a150e01056da8ad0b1ee8083da97feb";
-  var city = $("#searchInput").val();
   var url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=imperial`;
 
   console.log(url);
@@ -92,17 +98,28 @@ function citySearch(e) {
           return response.json();
         })
         .then(function (response) {
-          currentWeather.append("<p>" + "UV Index: " + response.value + "</p>");
+          currentWeather.append("<span>" + "UV Index: " + response.value + "</span>");
+          if (response.value <= 2) {
+            $("span").addClass("borderGreen");
+          };
+          if (response.value > 2 && response.value <= 5) {
+            $("span").addClass("borderYellow");
+          };
+          if (response.value > 5) {
+            $("span").addClass("borderRed");
+          };
         });
     });
+  }
 
-
-
+function fiveDay(e) {
+  e.preventDefault();
   $.ajax({
     url: "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + key + "&units=imperial",
     method: "GET"
   })
     .then(function (response) {
+      console.log("this is response", response);
       for (i = 0; i < 5; i++) {
 
         var newItem = $("<div>");
@@ -126,3 +143,43 @@ function citySearch(e) {
       }
     })
 }
+
+
+// function fiveDay(e) {
+//   e.preventDefault();
+//   $.ajax({
+//     url: "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + key + "&units=imperial",
+//     method: "GET"
+//   })
+//     .then(function (response) {
+//       console.log("this is response", response);
+//       for (i = 0; i < 5; i++) {
+        
+//         var newItem = $("<div>");
+//         $(".fiveDay").append(newItem);
+
+//       // var date = new Date(response.list.dt * 1000);
+//       // var dateInfo = $("#date");
+//       // dateInfo.text(date.toLocaleDateString());
+
+//       // var iconCode = response.list.weather[0].icon;
+//       // var iconURL = "http://openweathermap.org/img/wn/" + iconCode + ".png";
+//       // var icon = $("#icon")
+//       // icon.html($("<img>").attr("src", iconURL));
+
+//       var temp = response.list[i].main.temp;
+//       var tempInfo = $("#temperature")
+//       tempInfo.text("Temp: " + temp + " F");
+
+//       var humidity = response.list[i].main.humidity;
+//       var humidityInfo = $("#humidity")
+//       humidityInfo.text("Humidity: " + humidity);
+
+//       var wind = response.list[i].wind.speed;
+//       var windInfo = $("#wind")
+//       windInfo.text("Wind: " + wind + " mph");
+//       }
+//     })
+// }
+
+searchButton.on("click", callFunctions);
