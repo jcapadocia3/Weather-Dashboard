@@ -2,7 +2,7 @@
 <html lang="en-US">
    
    <head>
-      <title>Meta Tags Example</title>
+      <title>Weather Dashboard</title>
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
       <link rel="stylesheet" href="./assets/css/style.css">
@@ -15,7 +15,7 @@
             <div class="card">
               <h3 class="card-header">Search By City:</h3>
               <form id="user-form" class="card-body">
-                <label class="form-label" for="searchForm1">City</label>
+                <label class="form-label" for="searchForm1">City:</label>
                 <input name="searchForm1" id="searchInput" type="text" autofocus="true" class="form-input" />
                 <button id="searchButton" type="submit" class="btn">Search</button>
               </form>
@@ -24,7 +24,6 @@
             <div class="card">
               <h3 class="card-header">Search History:</h3>
               <div id="searchList" class="card-body">
-                <!-- <ul id="test">Test</ul> -->
               </div>
             </div>
           </div>
@@ -32,16 +31,11 @@
         <div class="weatherBoxes">
         <div class="weatherContent" class="col-12 col-md-8">
             <h2 class="cityChoice">Current Weather:</h2>
-            <div id="repos-container" class="list-group"></div>
+            <div class="cityInfo"></div>
         </div>
         <div class="weatherContent1" class="col-12 col-md-8">
             <h2 class="fiveDay">5 Day Forecast:</h2>
             <div id="repos-container" class="list-group"></div>
-            <!-- <h4 id="date"></h4>
-            <img id="icon">
-            <p id="temperature"></p>
-            <p id="humidity"></p>
-            <p id="wind"></p> -->
         </div>
         </div>
 

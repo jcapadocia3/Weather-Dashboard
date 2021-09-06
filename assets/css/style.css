@@ -19,11 +19,18 @@ main {
 .cityChoice {
     font-size: 20px;
     margin: 10px;
+    font-weight: bold;
+}
+
+.cityInfo {
+    width: 300px;
+    margin: 20px;
 }
 
 .fiveDay {
-    font-size: 15px;
+    font-size: 20px;
     margin: 10px;
+    font-weight: bold;
 }
 
 .borderGreen {
