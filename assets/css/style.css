@@ -1,7 +1,7 @@
 h1 {
     text-align: center;
     color: white;
-    background-color: blue;
+    background-color: #0d6efd;
     padding: 8px;
 }
 
@@ -11,12 +11,13 @@ main {
 
 .weatherContent {
     /* height: 250px; */
-    border: 2px solid black;
+    border: 2px solid #0d6efd;
+    border-radius: 5%;
     width: auto;
 }
 
 .cityChoice {
-    font-size: 15px;
+    font-size: 20px;
     margin: 10px;
 }
 
@@ -28,14 +29,17 @@ main {
 .borderGreen {
     border: 2px solid green;
     padding: 5px;
+    border-radius: 8px;
 }
 
 .borderYellow {
     border: 2px solid yellow;
     padding: 5px;
+    border-radius: 8px;
 }
 
 .borderRed {
     border: 2px solid red;
     padding: 5px;
+    border-radius: 8px;
 }

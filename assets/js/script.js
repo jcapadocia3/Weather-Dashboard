@@ -122,8 +122,8 @@ function fiveDay(e) {
       console.log("this is response", response);
       for (i = 0; i < 5; i++) {
 
-        var newItem = $("<div>");
-        $(".fiveDay").append(newItem);
+        var newItem = $("<div>").attr("class", "col-sm-8 bg-primary text-white rounded");
+        $(".weatherContent1").append(newItem);
 
         var date = new Date(response.list[i * 8].dt * 1000);
         newItem.append("<h4>" + date.toLocaleDateString() + "<h4>");
