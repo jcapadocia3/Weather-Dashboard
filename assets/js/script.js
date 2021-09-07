@@ -2,6 +2,7 @@
 var searchButton = $("#searchButton");
 var key = "3a150e01056da8ad0b1ee8083da97feb";
 var city = $("#searchInput").val();
+var listCity = $(".list-group-item.list-group-item-action");
 
 // Begin function to save user input in local storage
 $("#searchButton").click(function () {
@@ -19,19 +20,12 @@ $("#searchButton").click(function () {
     // Sets output immediately when a city is searched
     var historyButton = $("<a>").attr({
       class: "list-group-item list-group-item-action",
-      href: "#",
+      // href: "#",
     });
 
     historyButton.text(city);
     $("#searchList").append(historyButton);
   }
-});
-
-// Eventlistener for any list item that is clicked in Search History
-$(".list-group-item").click(function () {
-  city = $(this).val();
-  citySearch(e);
-  fiveDay(e);
 });
 
 var searchHistory = [];
@@ -53,7 +47,7 @@ function getItems() {
     // Gets locally stored data for it to persist
     historyButton = $("<a>").attr({
       class: "list-group-item list-group-item-action",
-      href: "#",
+      // href: "#",
     });
 
     historyButton.text(searchHistory[i]);
@@ -62,6 +56,18 @@ function getItems() {
 };
 
 getItems();
+
+// Eventlistener for any list item that is clicked in Search History
+// $(".list-group-item.list-group-item-action").click(function () {
+//   console.log($(".list-group-item.list-group-item-action")[0].innerHTML);
+//   callFunctions(e);
+// });
+
+$(".list-group-item").click(function () {
+  city = $(this).val();
+  callFunctions(e);
+  e.preventDefault();
+});
 
 // Function to call API fetching functions
 function callFunctions(e) {
@@ -75,7 +81,7 @@ function citySearch(e) {
   e.preventDefault();
 
   // Begin API fetch and appending of data retrieved
-  var url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=imperial`;
+  var url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=imperial`;
 
   fetch(url, {
     method: "GET",
